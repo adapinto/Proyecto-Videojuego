@@ -1,5 +1,6 @@
 package Implementacion;
 
+import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.scene.Group;
@@ -15,6 +16,7 @@ public class Juego extends Application {
 		private Scene escena;
 		private Canvas lienzo;
 		private GraphicsContext graficos;
+		private int x=0;
 	
 	public static void main (String [] args) {
 	launch (args);	
@@ -24,11 +26,30 @@ public class Juego extends Application {
 	@Override
 	public void start(Stage ventana) throws Exception {
 		inicializarComponentes();
-		pintar();
 		gestionEventos();
 		ventana.setScene(escena);
 		ventana.setTitle("Oppositi Complementari");
 		ventana.show();
+		cicloJuego();
+		
+	}
+	
+	public void cicloJuego() {
+		long tiempoInicial=System.nanoTime();
+		AnimationTimer animationTimer= new AnimationTimer() {
+
+			@Override
+			public void handle(long tiempoActual) {
+				double t=(tiempoActual-tiempoInicial)/1000000000.0;
+				actualizarEstado();
+				pintar();
+			}
+			
+		};
+		animationTimer.start();
+		}
+	
+	public void actualizarEstado() {
 		
 	}
 	
@@ -43,7 +64,7 @@ public class Juego extends Application {
 	
 	public void pintar() {
 		graficos.fillRect(0, 0,700, 500);
-		graficos.drawImage(new Image("personaje.png"),0,0);
+		graficos.drawImage(new Image("personaje.png"),x,0);
 	}
 	
 	
@@ -52,7 +73,11 @@ public class Juego extends Application {
 		escena.setOnKeyPressed(new EventHandler<KeyEvent>() {
 			@Override
 			public void handle(KeyEvent evento) {
-				System.out.println("Se está presionado la tecla:"+evento.getCode());
+				switch (evento.getCode().toString()) {
+				case "RIGHT":
+					x+=10;
+					break;
+				}
 			}	
 		});
 			
