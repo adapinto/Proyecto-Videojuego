@@ -2,6 +2,7 @@ package Implementacion;
 
 import java.util.HashMap;
 
+import Clases.Fondo;
 import Clases.Jugador;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
@@ -20,6 +21,7 @@ public class Juego extends Application{
 	private Scene escena;
 	private Canvas lienzo;
 	private Jugador jugador;
+	private Fondo fondo;
 	public static boolean arriba;
 	public static boolean abajo;
 	public static boolean izquierda;
@@ -59,12 +61,14 @@ public class Juego extends Application{
 	
 	public void actualizarEstado() {
 		jugador.mover();
+		fondo.mover();
 	}
 	
 	public void inicializarComponentes() {
 		imagenes = new HashMap<String,Image>();
 		cargarImagenes();
-		jugador = new Jugador(20, 325, 3, "personaje");
+		jugador = new Jugador(20, 325,"personaje",3 ,3);
+		fondo= new Fondo(0,0,"fondo", "fondo2", -3);
 		root = new Group();
 		escena = new Scene(root, 700, 500);
 		lienzo = new Canvas(700, 500);
@@ -74,10 +78,12 @@ public class Juego extends Application{
 	
 	public void cargarImagenes() {
 		imagenes.put("personaje", new Image("personaje.png"));
+		imagenes.put("fondo",new Image("fondo.jpg"));
+		imagenes.put("fondo2",new Image("fondo2.jpg"));
 	}
 	
 	public void pintar() {
-		graficos.drawImage(new Image("fondo.jpg"), 0, 0);
+		fondo.pintar(graficos);
 		jugador.pintar(graficos);
 	}
 	
