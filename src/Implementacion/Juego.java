@@ -68,7 +68,7 @@ public class Juego extends Application{
 		imagenes = new HashMap<String,Image>();
 		cargarImagenes();
 		jugador = new Jugador(20, 325,"personaje",3 ,3);
-		fondo= new Fondo(0,0,"fondo", "fondo2", -3);
+		fondo= new Fondo(0,0,"fondo", "fondo2", 5);
 		root = new Group();
 		escena = new Scene(root, 700, 500);
 		lienzo = new Canvas(700, 500);
