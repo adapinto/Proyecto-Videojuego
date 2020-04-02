@@ -80,10 +80,16 @@ public class Juego extends Application{
 		imagenes.put("personaje", new Image("personaje.png"));
 		imagenes.put("fondo",new Image("fondo.jpg"));
 		imagenes.put("fondo2",new Image("fondo2.jpg"));
+		imagenes.put("tiles01",new Image("tiles01.png"));
 	}
 	
 	public void pintar() {
 		fondo.pintar(graficos);
+		graficos.drawImage(imagenes.get("tiles01"), 134, 198,32,32, 200, 250, 32,32);
+		graficos.drawImage(imagenes.get("tiles01"), 1, 200,32,32, 231, 250, 32,33);
+		graficos.drawImage(imagenes.get("tiles01"), 1, 200,32,32, 262, 250, 32,33);
+		graficos.drawImage(imagenes.get("tiles01"), 1, 200,32,32, 292, 250, 32,33);
+		graficos.drawImage(imagenes.get("tiles01"), 134, 231,32,32,322, 250, 32,32);
 		jugador.pintar(graficos);
 	}
 	
