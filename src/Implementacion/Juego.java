@@ -1,9 +1,11 @@
 package Implementacion;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import Clases.Fondo;
 import Clases.Jugador;
+import Clases.Tiles;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.event.EventHandler;
@@ -27,6 +29,22 @@ public class Juego extends Application{
 	public static boolean izquierda;
 	public static boolean derecha;
 	public static HashMap<String, Image> imagenes;
+
+	private ArrayList<Tiles> tiles;
+
+	private int tilemap[][] = {
+			{0,0,0,0,0,0,0,0,0,0},
+			{0,0,0,0,0,0,0,0,0,0},
+			{0,0,0,0,0,0,0,0,0,0},
+			{0,0,0,0,0,0,0,0,0,0},
+			{0,0,0,0,0,0,0,0,0,0},
+			{0,0,0,0,0,0,0,0,0,0},
+			{0,0,0,0,0,0,0,0,0,0},
+			{0,0,0,0,0,0,0,0,0,0},
+			{0,0,0,0,0,0,0,0,0,0},
+			{0,0,0,0,0,0,0,0,0,0},
+			
+	};
 
 	public static void main(String[] args) {
 		launch(args);
@@ -69,6 +87,7 @@ public class Juego extends Application{
 		cargarImagenes();
 		jugador = new Jugador(20, 325,"personaje",3 ,3);
 		fondo= new Fondo(0,0,"fondo", "fondo2", 5);
+		tile= new Tiles (0,0,"tiles01",0,134,198,32,32);
 		root = new Group();
 		escena = new Scene(root, 700, 500);
 		lienzo = new Canvas(700, 500);
@@ -85,11 +104,7 @@ public class Juego extends Application{
 	
 	public void pintar() {
 		fondo.pintar(graficos);
-		graficos.drawImage(imagenes.get("tiles01"), 134, 198,32,32, 200, 250, 32,32);
-		graficos.drawImage(imagenes.get("tiles01"), 1, 200,32,32, 231, 250, 32,33);
-		graficos.drawImage(imagenes.get("tiles01"), 1, 200,32,32, 262, 250, 32,33);
-		graficos.drawImage(imagenes.get("tiles01"), 1, 200,32,32, 292, 250, 32,33);
-		graficos.drawImage(imagenes.get("tiles01"), 134, 231,32,32,322, 250, 32,32);
+		tile.pintar(graficos);
 		jugador.pintar(graficos);
 	}
 	
