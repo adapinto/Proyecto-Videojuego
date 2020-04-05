@@ -33,7 +33,7 @@ public class Juego extends Application{
 	private ArrayList<Tiles> tiles;
 
 	private int tilemap[][] = {
-			{0,0,0,0,0,0,0,0,0,0},
+			{1,0,1,0,0,0,0,0,0,0},
 			{0,0,0,0,0,0,0,0,0,0},
 			{0,0,0,0,0,0,0,0,0,0},
 			{0,0,0,0,0,0,0,0,0,0},
@@ -87,12 +87,23 @@ public class Juego extends Application{
 		cargarImagenes();
 		jugador = new Jugador(20, 325,"personaje",3 ,3);
 		fondo= new Fondo(0,0,"fondo", "fondo2", 5);
-		tile= new Tiles (0,0,"tiles01",0,134,198,32,32);
+		inicializarTiles();
 		root = new Group();
 		escena = new Scene(root, 700, 500);
 		lienzo = new Canvas(700, 500);
 		root.getChildren().add(lienzo);
 		graficos = lienzo.getGraphicsContext2D();
+	}
+	
+	
+	public void inicializarTiles() {
+		tiles = new ArrayList<Tiles>();
+		for(int i=0;i<tilemap.length;i++) {
+			for(int j=0;j<tilemap[i].length;j++) {
+				if (tilemap[i][j]!=0)
+					this.tiles.add(new Tiles(tilemap[i][j],j*70,i*70,"tile01",0,32,32));
+			}
+		}
 	}
 	
 	public void cargarImagenes() {
@@ -104,7 +115,8 @@ public class Juego extends Application{
 	
 	public void pintar() {
 		fondo.pintar(graficos);
-		tile.pintar(graficos);
+		for(int i=0;i<tiles.size();i++)
+			tiles.get(i).pintar(graficos);
 		jugador.pintar(graficos);
 	}
 	

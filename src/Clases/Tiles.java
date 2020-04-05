@@ -17,12 +17,36 @@ public class Tiles extends ObjetoJuego {
 		
 		switch(tipoTile) {
 		case 1:
-		
-		
-		
+			this.xImagen = 134;
+			this.yImagen = 200;
+			break;
+		case 2:
+			this.xImagen=0;
+			this.yImagen=200;
+			break;
+		case 3:
+			this.xImagen=134;
+			this.yImagen=235;
+			break;
+		case 4:
+			this.xImagen=166;
+			this.yImagen=201;
+			break;
+		case 5:
+			this.xImagen=199;
+			this.yImagen=202;
+			break;
+		case 6:
+			this.xImagen=167;
+			this.yImagen=202;
+			break;
+		case 7:
+			this.xImagen=294;
+			this.yImagen=14;
+			break;
+	}
 		}
 
-	}
 
 	public int getxImagen() {
 		return xImagen;
