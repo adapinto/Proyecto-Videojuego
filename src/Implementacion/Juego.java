@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import Clases.Fondo;
-import Clases.Jugador;
+import Clases.JugadorAnimado;
 import Clases.Tiles;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
@@ -14,7 +14,7 @@ import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
-import javafx.scene.input.KeyEvent;
+import javafx.scene.input.KeyEvent; 
 import javafx.stage.Stage;
 
 public class Juego extends Application{
@@ -22,7 +22,7 @@ public class Juego extends Application{
 	private Group root;
 	private Scene escena;
 	private Canvas lienzo;
-	private Jugador jugador;
+	private JugadorAnimado jugadorAnimado;
 	private Fondo fondo;
 	public static boolean arriba;
 	public static boolean abajo;
@@ -33,13 +33,13 @@ public class Juego extends Application{
 	private ArrayList<Tiles> tiles;
 
 	private int tilemap[][] = {
-			{1,0,1,0,0,0,0,0,0,0},
 			{0,0,0,0,0,0,0,0,0,0},
 			{0,0,0,0,0,0,0,0,0,0},
 			{0,0,0,0,0,0,0,0,0,0},
 			{0,0,0,0,0,0,0,0,0,0},
 			{0,0,0,0,0,0,0,0,0,0},
 			{0,0,0,0,0,0,0,0,0,0},
+			{0,0,1,2,2,2,2,3,0,0},
 			{0,0,0,0,0,0,0,0,0,0},
 			{0,0,0,0,0,0,0,0,0,0},
 			{0,0,0,0,0,0,0,0,0,0},
@@ -68,7 +68,7 @@ public class Juego extends Application{
 			public void handle(long tiempoActual) {
 				double t = (tiempoActual - tiempoInicial) / 1000000000.0;
 				System.out.println(t);
-				actualizarEstado();
+				actualizarEstado(t);
 				pintar();
 			}
 			
@@ -77,15 +77,17 @@ public class Juego extends Application{
 		animationTimer.start();
 	}
 	
-	public void actualizarEstado() {
-		jugador.mover();
+	public void actualizarEstado(double t) {
+		jugadorAnimado.calcularFrame(t);
+		jugadorAnimado.mover();
 		fondo.mover();
 	}
 	
 	public void inicializarComponentes() {
 		imagenes = new HashMap<String,Image>();
 		cargarImagenes();
-		jugador = new Jugador(20, 325,"personaje",3 ,3);
+
+		jugadorAnimado= new JugadorAnimado(7,320,"HojaSprites",3,0, "descanso");
 		fondo= new Fondo(0,0,"fondo", "fondo2", 5);
 		inicializarTiles();
 		root = new Group();
@@ -95,13 +97,12 @@ public class Juego extends Application{
 		graficos = lienzo.getGraphicsContext2D();
 	}
 	
-	
 	public void inicializarTiles() {
 		tiles = new ArrayList<Tiles>();
 		for(int i=0;i<tilemap.length;i++) {
 			for(int j=0;j<tilemap[i].length;j++) {
 				if (tilemap[i][j]!=0)
-					this.tiles.add(new Tiles(tilemap[i][j],j*70,i*70,"tile01",0,32,32));
+					this.tiles.add(new Tiles(tilemap[i][j],j*31,i*31,"tiles01",0,31,31));
 			}
 		}
 	}
@@ -111,13 +112,14 @@ public class Juego extends Application{
 		imagenes.put("fondo",new Image("fondo.jpg"));
 		imagenes.put("fondo2",new Image("fondo2.jpg"));
 		imagenes.put("tiles01",new Image("tiles01.png"));
+		imagenes.put("HojaSprites",new Image("HojaSprites.png"));
 	}
 	
 	public void pintar() {
 		fondo.pintar(graficos);
 		for(int i=0;i<tiles.size();i++)
 			tiles.get(i).pintar(graficos);
-		jugador.pintar(graficos);
+		jugadorAnimado.pintar(graficos);
 	}
 	
 	public void gestionEventos() {
@@ -128,17 +130,22 @@ public class Juego extends Application{
 				switch(evento.getCode().toString()) {
 					case "RIGHT":
 						derecha = true;
+						jugadorAnimado.setDireccion(1);
+						jugadorAnimado.setAnimacionActual("correr");
 						break;
 					case "LEFT":
 						izquierda = true;
-						break;
+						jugadorAnimado.setDireccion(-1);
+						jugadorAnimado.setAnimacionActual("correr");
+						break; 
 					case "UP":
 						arriba = true;
 						break;
 					case "DOWN":
 						abajo = true;
+						break;
 					case "SPACE":
-						jugador.setVelocidad(15);
+						jugadorAnimado.setVelocidad(15);
 						break;
 				}
 			}
@@ -150,17 +157,20 @@ public class Juego extends Application{
 					switch(evento.getCode().toString()) {
 					case "RIGHT":
 						derecha = false;
+						jugadorAnimado.setAnimacionActual("descanso");
 						break;
 					case "LEFT":
 						izquierda = false;
+						jugadorAnimado.setAnimacionActual("descanso");
 						break;
 					case "UP":
 						arriba = false;
 						break;
 					case "DOWN":
 						abajo = false;
+						break;
 					case "SPACE":
-						jugador.setVelocidad(5);
+						jugadorAnimado.setVelocidad(5);
 				}
 			}
 			

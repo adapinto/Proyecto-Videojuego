@@ -17,32 +17,32 @@ public class Tiles extends ObjetoJuego {
 		
 		switch(tipoTile) {
 		case 1:
-			this.xImagen = 134;
-			this.yImagen = 200;
+			this.xImagen = 131;
+			this.yImagen = 198;
 			break;
 		case 2:
 			this.xImagen=0;
-			this.yImagen=200;
+			this.yImagen=198;
 			break;
 		case 3:
-			this.xImagen=134;
-			this.yImagen=235;
+			this.xImagen=132;
+			this.yImagen=232;
 			break;
 		case 4:
-			this.xImagen=166;
-			this.yImagen=201;
+			this.xImagen=164;
+			this.yImagen=199;
 			break;
 		case 5:
-			this.xImagen=199;
-			this.yImagen=202;
+			this.xImagen=197;
+			this.yImagen=200;
 			break;
 		case 6:
-			this.xImagen=167;
-			this.yImagen=202;
+			this.xImagen=165;
+			this.yImagen=200;
 			break;
 		case 7:
-			this.xImagen=294;
-			this.yImagen=14;
+			this.xImagen=292;
+			this.yImagen=12;
 			break;
 	}
 		}
