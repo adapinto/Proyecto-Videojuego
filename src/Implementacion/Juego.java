@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import Clases.Fondo;
+import Clases.Item;
 import Clases.JugadorAnimado;
 import Clases.Tiles;
 import javafx.animation.AnimationTimer;
@@ -29,6 +30,7 @@ public class Juego extends Application{
 	public static boolean izquierda;
 	public static boolean derecha;
 	public static HashMap<String, Image> imagenes;
+	private Item moneda;
 
 	private ArrayList<Tiles> tiles;
 
@@ -78,9 +80,11 @@ public class Juego extends Application{
 	}
 	
 	public void actualizarEstado(double t) {
+		jugadorAnimado.verificarColisionesItem(moneda);
 		jugadorAnimado.calcularFrame(t);
 		jugadorAnimado.mover();
 		fondo.mover();
+		
 	}
 	
 	public void inicializarComponentes() {
@@ -90,6 +94,7 @@ public class Juego extends Application{
 		jugadorAnimado= new JugadorAnimado(7,320,"HojaSprites",3,0, "descanso");
 		fondo= new Fondo(0,0,"fondo", "fondo2", 5);
 		inicializarTiles();
+		moneda= new Item(320,320,"moneda",0,1);
 		root = new Group();
 		escena = new Scene(root, 700, 500);
 		lienzo = new Canvas(700, 500);
@@ -113,6 +118,7 @@ public class Juego extends Application{
 		imagenes.put("fondo2",new Image("fondo2.jpg"));
 		imagenes.put("tiles01",new Image("tiles01.png"));
 		imagenes.put("HojaSprites",new Image("HojaSprites.png"));
+		imagenes.put("moneda", new Image("moneda.png"));
 	}
 	
 	public void pintar() {
@@ -120,6 +126,7 @@ public class Juego extends Application{
 		for(int i=0;i<tiles.size();i++)
 			tiles.get(i).pintar(graficos);
 		jugadorAnimado.pintar(graficos);
+		moneda.pintar(graficos);
 	}
 	
 	public void gestionEventos() {
