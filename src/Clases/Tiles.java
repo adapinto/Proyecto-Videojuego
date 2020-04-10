@@ -3,46 +3,50 @@ package Clases;
 import Implementacion.Juego;
 import javafx.scene.canvas.GraphicsContext;
 
+
 public class Tiles extends ObjetoJuego {
 	private int xImagen;
 	private int yImagen;
 	private int tipoTile;
+	
 	
 	public Tiles(int tipoTile, int x, int y, String nombreImagen, int velocidad, int alto, int ancho) {
 		super(x, y, nombreImagen, velocidad);
 		this.alto = alto;
 		this.ancho = ancho;
 		this.tipoTile=tipoTile;
+	
+		
 		
 		
 		switch(tipoTile) {
 		case 1:
-			this.xImagen = 131;
-			this.yImagen = 198;
+			this.xImagen = 35;
+			this.yImagen = 34;
 			break;
 		case 2:
-			this.xImagen=0;
-			this.yImagen=198;
+			this.xImagen=34;
+			this.yImagen=100;
 			break;
 		case 3:
-			this.xImagen=132;
-			this.yImagen=232;
+			this.xImagen=34;
+			this.yImagen=362;
 			break;
 		case 4:
-			this.xImagen=164;
-			this.yImagen=199;
+			this.xImagen=296;
+			this.yImagen=34;
 			break;
 		case 5:
-			this.xImagen=197;
-			this.yImagen=200;
+			this.xImagen=296;
+			this.yImagen=134;
 			break;
 		case 6:
-			this.xImagen=165;
-			this.yImagen=200;
+			this.xImagen=361;
+			this.yImagen=34;
 			break;
 		case 7:
-			this.xImagen=292;
-			this.yImagen=12;
+			this.xImagen=329;
+			this.yImagen=200;
 			break;
 	}
 		}
@@ -80,13 +84,22 @@ public class Tiles extends ObjetoJuego {
 		graficos.drawImage(Juego.imagenes.get(nombreImagen),xImagen,yImagen,ancho,alto,x,y,ancho,alto);
 		
 	}
+	
 
 	@Override
 	public void mover() {
-		// TODO Auto-generated method stub
 		
+		if (Juego.arriba) {
+			y-=velocidad;
+		}
+		
+		if (Juego.abajo) {
+			y+=velocidad;
+		}
+	}
 	}
 	
 	
 
-}
+	
+

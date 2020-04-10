@@ -4,7 +4,7 @@ import java.util.HashMap;
 
 import Implementacion.Juego;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.paint.Color;
+//import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
 public class JugadorAnimado extends ObjetoJuego {
@@ -57,6 +57,14 @@ public class JugadorAnimado extends ObjetoJuego {
 		};
 			Animacion animacionDescanso=new Animacion(0.4,coordenadasDescanso);
 			animaciones.put("descanso",animacionDescanso);
+			
+			Rectangle coordenadasCorrerArriba []= {
+					new Rectangle(5,220,60,31),
+					new Rectangle(53,220,62,33),
+					new Rectangle(102,220,62,33)
+			};
+				Animacion animacionCorrerArriba=new Animacion(0.08,coordenadasCorrerArriba);
+				animaciones.put("correrarriba",animacionCorrerArriba);
 	}
 	
 	public void calcularFrame(double t) {
@@ -73,26 +81,27 @@ public class JugadorAnimado extends ObjetoJuego {
 	@Override
 	public void pintar(GraphicsContext graficos) {
 		graficos.drawImage(Juego.imagenes.get(nombreImagen),xImagen,yImagen,anchoImagen,altoImagen, x,y,(direccion*anchoImagen),altoImagen);
-		graficos.setStroke(Color.RED);
-		graficos.strokeRect(x, y, (direccion*anchoImagen), altoImagen);
+		//graficos.setStroke(Color.RED);
+		//graficos.strokeRect(x, y, (direccion*anchoImagen), altoImagen);
 	}
 	
 	@Override
 	public void mover() {
 		if (x>700)
 			x=-80;
-		
+		if (y<0)
+			y=500;
 		if (Juego.derecha)
 			x+=velocidad;
 		
 		if (Juego.izquierda)
 			x-=velocidad;
 		
-		/*if (Juego.arriba)
+		if (Juego.arriba)
 			y-=velocidad;
 		
 		if (Juego.abajo)
-			y+=velocidad;*/ 
+			y+=velocidad;
 	}
 
 	public String getAnimacionActual() {
@@ -103,8 +112,8 @@ public class JugadorAnimado extends ObjetoJuego {
 		this.animacionActual = animacionActual;
 	}
 	
-	public void verificarColisionesItem(Item moneda) {
-	if	(this.obtenerRectangulo().getBoundsInLocal().intersects(moneda.obtenerRectangulo().getBoundsInLocal()));
+	/*public void verificarColisionesItem(Item item) {
+	if	(this.obtenerRectangulo().getBoundsInLocal().intersects(item.obtenerRectangulo().getBoundsInLocal()));
 	System.out.println("Estan colisionando");
-		}
+		}*/
 }

@@ -30,21 +30,61 @@ public class Juego extends Application{
 	public static boolean izquierda;
 	public static boolean derecha;
 	public static HashMap<String, Image> imagenes;
-	private Item moneda;
+	private Item item;
 
 	private ArrayList<Tiles> tiles;
 
 	private int tilemap[][] = {
-			{0,0,0,0,0,0,0,0,0,0},
-			{0,0,0,0,0,0,0,0,0,0},
-			{0,0,0,0,0,0,0,0,0,0},
-			{0,0,0,0,0,0,0,0,0,0},
-			{0,0,0,0,0,0,0,0,0,0},
-			{0,0,0,0,0,0,0,0,0,0},
-			{0,0,1,2,2,2,2,3,0,0},
-			{0,0,0,0,0,0,0,0,0,0},
-			{0,0,0,0,0,0,0,0,0,0},
-			{0,0,0,0,0,0,0,0,0,0},
+			{2,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,2},
+			{2,1,0,0,0,0,5,0,0,0,0,0,0,0,0,0,0,5,0,0,0,0,1,2},
+			{2,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,2},
+			{2,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,2},
+			{2,1,0,0,0,0,0,0,0,0,0,7,0,0,0,0,0,0,0,0,0,0,1,2},
+			{2,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,2},
+			{2,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,2},
+			{2,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,2},
+			{2,1,0,0,0,0,5,0,0,0,0,0,0,0,0,0,0,5,0,0,0,0,1,2},
+			{2,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,2},
+			{2,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,2},
+			{2,1,0,0,0,0,0,0,0,0,0,7,0,0,0,0,0,0,0,0,0,0,1,2},
+			{2,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,2},
+			{2,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,2},
+			{2,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,2},
+			{2,1,0,0,0,0,5,0,0,0,0,0,0,0,0,0,0,5,0,0,0,0,1,2},
+			{2,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,2},
+			{2,1,0,0,0,0,5,0,0,0,0,0,0,0,0,0,0,5,0,0,0,0,1,2},
+			{2,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,2},
+			{2,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,2},
+			{2,1,0,0,0,0,0,0,0,0,0,7,0,0,0,0,0,0,0,0,0,0,1,2},
+			{2,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,2},
+			{2,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,2},
+			{2,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,2},
+			{2,1,0,0,0,0,5,0,0,0,0,0,0,0,0,0,0,5,0,0,0,0,1,2},
+			{2,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,2},
+			{2,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,2},
+			{2,1,0,0,0,0,0,0,0,0,0,7,0,0,0,0,0,0,0,0,0,0,1,2},
+			{2,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,2},
+			{2,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,2},
+			{2,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,2},
+			{2,1,0,0,0,0,5,0,0,0,0,0,0,0,0,0,0,5,0,0,0,0,1,2},
+			{2,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,2},
+			{2,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,2},
+			{2,1,0,0,0,0,5,0,0,0,0,0,0,0,0,0,0,5,0,0,0,0,1,2},
+			{2,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,2},
+			{2,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,2},
+			{2,1,0,0,0,0,0,0,0,0,0,7,0,0,0,0,0,0,0,0,0,0,1,2},
+			{2,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,2},
+			{2,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,2},
+			{2,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,2},
+			{2,1,0,0,0,0,5,0,0,0,0,0,0,0,0,0,0,5,0,0,0,0,1,2},
+			{2,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,2},
+			{2,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,2},
+			{2,1,0,0,0,0,0,0,0,0,0,7,0,0,0,0,0,0,0,0,0,0,1,2},
+			{2,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,2},
+			{2,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,2},
+			{2,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,2},
+			{2,1,0,0,0,0,5,0,0,0,0,0,0,0,0,0,0,5,0,0,0,0,1,2},
+			{2,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,2}
 			
 	};
 
@@ -69,7 +109,7 @@ public class Juego extends Application{
 			@Override
 			public void handle(long tiempoActual) {
 				double t = (tiempoActual - tiempoInicial) / 1000000000.0;
-				System.out.println(t);
+				//System.out.println(t);
 				actualizarEstado(t);
 				pintar();
 			}
@@ -80,21 +120,22 @@ public class Juego extends Application{
 	}
 	
 	public void actualizarEstado(double t) {
-		jugadorAnimado.verificarColisionesItem(moneda);
+		//jugadorAnimado.verificarColisionesItem(item);
 		jugadorAnimado.calcularFrame(t);
 		jugadorAnimado.mover();
-		fondo.mover();
-		
+		fondo.mover();	
+		for(int i=0;i<tiles.size();i++)
+			tiles.get(i).mover();
 	}
 	
 	public void inicializarComponentes() {
 		imagenes = new HashMap<String,Image>();
 		cargarImagenes();
 
-		jugadorAnimado= new JugadorAnimado(7,320,"HojaSprites",3,0, "descanso");
-		fondo= new Fondo(0,0,"fondo", "fondo2", 5);
+		jugadorAnimado= new JugadorAnimado(250,400,"HojaSprites",3,0, "descanso");
+		fondo= new Fondo(0,0,"fondo", "fondo2", 1);
 		inicializarTiles();
-		moneda= new Item(320,320,"moneda",0,1);
+		item= new Item(320,320,"item",0,1);
 		root = new Group();
 		escena = new Scene(root, 700, 500);
 		lienzo = new Canvas(700, 500);
@@ -107,7 +148,7 @@ public class Juego extends Application{
 		for(int i=0;i<tilemap.length;i++) {
 			for(int j=0;j<tilemap[i].length;j++) {
 				if (tilemap[i][j]!=0)
-					this.tiles.add(new Tiles(tilemap[i][j],j*31,i*31,"tiles01",0,31,31));
+					this.tiles.add(new Tiles(tilemap[i][j],j*30,i*30,"tiles01",1,30,30));
 			}
 		}
 	}
@@ -118,15 +159,15 @@ public class Juego extends Application{
 		imagenes.put("fondo2",new Image("fondo2.jpg"));
 		imagenes.put("tiles01",new Image("tiles01.png"));
 		imagenes.put("HojaSprites",new Image("HojaSprites.png"));
-		imagenes.put("moneda", new Image("moneda.png"));
+		imagenes.put("item", new Image("item.png"));
 	}
 	
 	public void pintar() {
 		fondo.pintar(graficos);
-		for(int i=0;i<tiles.size();i++)
+	for(int i=0;i<tiles.size();i++)
 			tiles.get(i).pintar(graficos);
 		jugadorAnimado.pintar(graficos);
-		moneda.pintar(graficos);
+		//item.pintar(graficos);
 	}
 	
 	public void gestionEventos() {
@@ -147,6 +188,7 @@ public class Juego extends Application{
 						break; 
 					case "UP":
 						arriba = true;
+						jugadorAnimado.setAnimacionActual("correrarriba");
 						break;
 					case "DOWN":
 						abajo = true;
@@ -172,6 +214,7 @@ public class Juego extends Application{
 						break;
 					case "UP":
 						arriba = false;
+						jugadorAnimado.setAnimacionActual("descanso");
 						break;
 					case "DOWN":
 						abajo = false;
