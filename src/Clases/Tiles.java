@@ -16,9 +16,6 @@ public class Tiles extends ObjetoJuego {
 		this.ancho = ancho;
 		this.tipoTile=tipoTile;
 	
-		
-		
-		
 		switch(tipoTile) {
 		case 1:
 			this.xImagen = 35;
@@ -98,7 +95,6 @@ public class Tiles extends ObjetoJuego {
 		}
 	}
 	}
-	
 	
 
 	

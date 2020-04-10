@@ -65,6 +65,8 @@ public class JugadorAnimado extends ObjetoJuego {
 			};
 				Animacion animacionCorrerArriba=new Animacion(0.08,coordenadasCorrerArriba);
 				animaciones.put("correrarriba",animacionCorrerArriba);
+				
+				
 	}
 	
 	public void calcularFrame(double t) {

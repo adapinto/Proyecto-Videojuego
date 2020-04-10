@@ -7,6 +7,7 @@ import Clases.Fondo;
 import Clases.Item;
 import Clases.JugadorAnimado;
 import Clases.Tiles;
+import Clases.Villano;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.event.EventHandler;
@@ -24,6 +25,7 @@ public class Juego extends Application{
 	private Scene escena;
 	private Canvas lienzo;
 	private JugadorAnimado jugadorAnimado;
+	private Villano villano;
 	private Fondo fondo;
 	public static boolean arriba;
 	public static boolean abajo;
@@ -59,7 +61,7 @@ public class Juego extends Application{
 			{2,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,2},
 			{2,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,2},
 			{2,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,2},
-			{2,1,0,0,0,0,5,0,0,0,0,0,0,0,0,0,0,5,0,0,0,0,1,2},
+			{2,1,0,0,0,0,5,0,0,0,0,4,0,0,0,0,0,5,0,0,0,0,1,2},
 			{2,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,2},
 			{2,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,2},
 			{2,1,0,0,0,0,0,0,0,0,0,7,0,0,0,0,0,0,0,0,0,0,1,2},
@@ -133,6 +135,7 @@ public class Juego extends Application{
 		cargarImagenes();
 
 		jugadorAnimado= new JugadorAnimado(250,400,"HojaSprites",3,0, "descanso");
+		villano= new Villano(200, 300, "villano", 1, "villano");
 		fondo= new Fondo(0,0,"fondo", "fondo2", 1);
 		inicializarTiles();
 		item= new Item(320,320,"item",0,1);
@@ -160,14 +163,17 @@ public class Juego extends Application{
 		imagenes.put("tiles01",new Image("tiles01.png"));
 		imagenes.put("HojaSprites",new Image("HojaSprites.png"));
 		imagenes.put("item", new Image("item.png"));
+		imagenes.put("villano", new Image("villano.png"));
 	}
 	
 	public void pintar() {
 		fondo.pintar(graficos);
 	for(int i=0;i<tiles.size();i++)
 			tiles.get(i).pintar(graficos);
+		villano.pintar(graficos);
 		jugadorAnimado.pintar(graficos);
 		//item.pintar(graficos);
+		
 	}
 	
 	public void gestionEventos() {
