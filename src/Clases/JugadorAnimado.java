@@ -4,6 +4,7 @@ import java.util.HashMap;
 
 import Implementacion.Juego;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.paint.Color;
 //import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
@@ -83,8 +84,8 @@ public class JugadorAnimado extends ObjetoJuego {
 	@Override
 	public void pintar(GraphicsContext graficos) {
 		graficos.drawImage(Juego.imagenes.get(nombreImagen),xImagen,yImagen,anchoImagen,altoImagen, x,y,(direccion*anchoImagen),altoImagen);
-		//graficos.setStroke(Color.RED);
-		//graficos.strokeRect(x, y, (direccion*anchoImagen), altoImagen);
+		graficos.setStroke(Color.RED);
+        graficos.strokeRect(x, y, (direccion*anchoImagen), altoImagen);
 	}
 	
 	@Override
@@ -114,8 +115,8 @@ public class JugadorAnimado extends ObjetoJuego {
 		this.animacionActual = animacionActual;
 	}
 	
-	/*public void verificarColisionesItem(Item item) {
-	if	(this.obtenerRectangulo().getBoundsInLocal().intersects(item.obtenerRectangulo().getBoundsInLocal()));
+	public void verificarColisionesItem(Item coin) {
+	if	(this.obtenerRectangulo().getBoundsInLocal().intersects(coin.obtenerRectangulo().getBoundsInLocal()));
 	System.out.println("Estan colisionando");
-		}*/
+		}
 }
